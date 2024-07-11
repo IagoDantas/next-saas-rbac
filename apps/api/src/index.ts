@@ -1,11 +1,14 @@
-import { defineAbilityFor } from '@saas/auth'
+import {
+  defineAbilityFor,
+  projectSchema,
+  userSchema,
+  organizationSchema,
+} from '@saas/auth'
 
-const ability = defineAbilityFor({ role: 'MEMBER' })
-const userCanInviteSomeoneElse = ability.can('invite', 'User')
-const userCanDeleteOtherUsers = ability.can('delete', 'User')
+const ability = defineAbilityFor({ role: 'MEMBER', id: 'user-id' })
 
-const userCannotDeleteOtherUsers = ability.cannot('delete', 'User')
+const project = projectSchema.parse({ id: 'project-id', ownerId: 'user2-id' })
 
-console.log(userCanInviteSomeoneElse)
-console.log(userCanDeleteOtherUsers)
-console.log(userCannotDeleteOtherUsers)
+console.log(ability.can('get', 'Billing'))
+console.log(ability.can('create', 'Invite'))
+console.log(ability.can('delete', project))
