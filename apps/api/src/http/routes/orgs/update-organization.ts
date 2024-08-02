@@ -7,14 +7,15 @@ import { auth } from '@/http/middlewares/auth'
 import { prisma } from '@/lib/prisma'
 import { getUserPermissions } from '@/utils/get-user-permissions'
 
+import { BadRequestError } from '../_errors/bad-request-error'
 import { UnauthorizedError } from '../_errors/unauthorized-error'
 
 export async function updateOrganization(app: FastifyInstance) {
   app
     .withTypeProvider<ZodTypeProvider>()
     .register(auth)
-    .post(
-      '/organizations',
+    .put(
+      '/organizations/:slug',
       {
         schema: {
           tags: ['organizations'],
@@ -56,7 +57,7 @@ export async function updateOrganization(app: FastifyInstance) {
           })
 
           if (organizationByDomain) {
-            throw new Error(
+            throw new BadRequestError(
               'Another Organization with same domain already exists',
             )
           }
