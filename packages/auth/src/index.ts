@@ -3,7 +3,6 @@ import {
   CreateAbility,
   createMongoAbility,
   MongoAbility,
-  subject,
 } from '@casl/ability'
 import { z } from 'zod'
 
@@ -46,5 +45,7 @@ export function defineAbilityFor(user: User) {
     },
   })
 
+  ability.can = ability.can.bind(ability)
+  ability.cannot = ability.cannot.bind(ability)
   return ability
 }
