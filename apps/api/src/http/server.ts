@@ -26,6 +26,7 @@ import { shutdownOrganization } from './routes/orgs/shutdown-organization'
 import { transferOrganization } from './routes/orgs/transfer-organization'
 import { updateOrganization } from './routes/orgs/update-organization'
 import { createProject } from './routes/projects/create-project'
+import { deleteProject } from './routes/projects/delete-project'
 
 const app = fastify().withTypeProvider<ZodTypeProvider>()
 
@@ -62,6 +63,7 @@ app.register(getProfile)
 app.register(requestPasswordRecover)
 app.register(createOrganization)
 app.register(createProject)
+app.register(deleteProject)
 app.register(getMembership)
 app.register(resetPassword)
 app.register(authenticateWithGithub)
