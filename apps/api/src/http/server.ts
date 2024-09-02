@@ -28,6 +28,7 @@ import { updateOrganization } from './routes/orgs/update-organization'
 import { createProject } from './routes/projects/create-project'
 import { deleteProject } from './routes/projects/delete-project'
 import { getProject } from './routes/projects/get-project'
+import { getProjects } from './routes/projects/get-projects'
 
 const app = fastify().withTypeProvider<ZodTypeProvider>()
 
@@ -62,6 +63,7 @@ app.register(fastifyJwt, {
 app.register(createAccount)
 app.register(getProfile)
 app.register(getProject)
+app.register(getProjects)
 app.register(requestPasswordRecover)
 app.register(createOrganization)
 app.register(createProject)
